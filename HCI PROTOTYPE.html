@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Results Portal</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        margin: 0;
+    }
+
+    .header {
+        padding: 10px 20px;
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .status {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .status.green { background: #e6f7e6; color: green; }
+    .status.orange { background: #fff4e6; color: orange; }
+    .status.red { background: #ffe6e6; color: red; }
+
+    .container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(to right, blue, purple);
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+
+    .tips {
+        background: #eef4ff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .help {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h3>Student Results Portal</h3>
+</div>
+
+<div id="statusBar" class="status green">
+    Server Status: All systems operational
+</div>
+
+<div class="container">
+
+    <div class="tips">
+        <b>Quick Tips:</b>
+        <ul>
+            <li>No CAPTCHA required</li>
+            <li>Fast results loading</li>
+            <li>Secure login</li>
+        </ul>
+    </div>
+
+    <h2>View Your Results</h2>
+
+    <label>Hall Ticket Number</label>
+    <input type="text" id="hallticket" placeholder="e.g. 24CS001">
+
+    <label>Date of Birth</label>
+    <input type="date" id="dob">
+
+    <button onclick="getResults()">View Results</button>
+
+    <div id="result" style="margin-top:20px;"></div>
+
+    <div class="help">
+        <p><b>Need Help?</b></p>
+        <p>Check your email or contact department office</p>
+    </div>
+
+</div>
+
+<script>
+    // Simulate server load randomly
+    function updateServerStatus() {
+        let status = document.getElementById("statusBar");
+        let random = Math.random();
+
+        if (random < 0.4) {
+            status.className = "status green";
+            status.innerText = "Server Status: All systems operational";
+        } else if (random < 0.7) {
+            status.className = "status orange";
+            status.innerText = "Server Status: Moderate traffic - Please wait";
+        } else {
+            status.className = "status red";
+            status.innerText = "Server Status: High traffic detected";
+        }
+    }
+
+    setInterval(updateServerStatus, 5000);
+
+    function getResults() {
+        let hall = document.getElementById("hallticket").value;
+        let dob = document.getElementById("dob").value;
+        let result = document.getElementById("result");
+
+        if (hall === "" || dob === "") {
+            result.innerHTML = "<span style='color:red;'>Please fill all fields</span>";
+            return;
+        }
+
+        result.innerHTML = "<span style='color:blue;'>Loading results...</span>";
+
+        setTimeout(() => {
+            result.innerHTML = `
+                <b>Result:</b><br>
+                Name: Student<br>
+                Marks: 85%<br>
+                Status: Pass
+            `;
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
